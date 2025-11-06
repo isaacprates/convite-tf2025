@@ -14,20 +14,18 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             text-align: center;
             background-color: #f0f0f0; 
-            line-height: 1.4; /* Melhora a leitura */
+            line-height: 1.4; 
         }
 
-        /* O container que segura a imagem e o texto */
         .convite-container {
             position: relative; 
-            max-width: 600px; /* Trava o tamanho máximo no PC */
+            max-width: 600px; 
             margin: auto; 
             display: block; 
             overflow: hidden; 
             box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
         }
 
-        /* A imagem de fundo (SUA ARTE COMPLETA) */
         .convite-container img {
             width: 100%; 
             display: block; 
@@ -36,7 +34,12 @@
         /* Onde o texto interativo vai ficar */
         .conteudo {
             position: absolute; 
-            bottom: 3%; /* Posição do texto (ajuste se precisar) */
+            
+            /* !!!! AJUSTE 1: DESCI O BLOCO !!!!
+              Estava 3%, agora começa mais de baixo 
+            */
+            bottom: 1%; 
+            
             left: 50%;
             transform: translateX(-50%);
             width: 90%; 
@@ -52,20 +55,18 @@
         #area-input input {
             width: calc(80% - 20px); 
             padding: 10px;
-            /* FONTE RESPONSIVA */
-            font-size: clamp(14px, 4vw, 16px);
+            font-size: clamp(12px, 3.5vw, 15px); /* Diminuído */
             border: 1px solid #ccc;
             border-radius: 4px;
             margin-bottom: 10px;
         }
         #area-input button {
             padding: 10px 20px;
-            /* FONTE RESPONSIVA */
-            font-size: clamp(14px, 4vw, 16px);
+            font-size: clamp(12px, 3.5vw, 15px); /* Diminuído */
             cursor: pointer;
             border: none;
             border-radius: 4px;
-            background-color: #007bff; /* Azul */
+            background-color: #007bff;
             color: white;
         }
 
@@ -73,56 +74,56 @@
         #area-convite {
             display: none; 
             color: #333; 
-            /* FONTE BASE RESPONSIVA */
-            font-size: clamp(10px, 2.8vw, 14px);
+            /* !!!! AJUSTE 2: FONTE BASE DIMINUÍDA !!!! */
+            font-size: clamp(8px, 2.5vw, 12px);
         }
         
         /* Título "CONVITE ESPECIAL" e "Culto Internacional..." */
         #area-convite h2 {
-            /* FONTE RESPONSIVA */
-            font-size: clamp(12px, 3.5vw, 16px);
+            /* !!!! AJUSTE 2: FONTE DIMINUÍDA !!!! */
+            font-size: clamp(10px, 3vw, 14px);
             font-weight: bold;
-            margin: 8px 0;
+            margin: 5px 0; /* Margem diminuída */
             color: #000;
         }
         
         #area-convite p {
-             margin: 5px 0; 
+             margin: 4px 0; /* Margem diminuída */
         }
 
         /* "Olá, Isaac!" */
         #nome-destaque {
-            color: #d9534f; /* Vermelho/vinho */
+            color: #d9534f; 
             font-weight: bold;
-            /* FONTE RESPONSIVA */
-            font-size: clamp(16px, 5vw, 22px);
-            margin-bottom: 8px;
+            /* !!!! AJUSTE 2: FONTE DIMINUÍDA !!!! */
+            font-size: clamp(14px, 4.5vw, 20px);
+            margin-bottom: 5px; /* Margem diminuída */
             margin-top: 0;
         }
         
         /* Endereço */
         #area-convite strong {
-            font-size: clamp(11px, 3vw, 14px);
+            /* !!!! AJUSTE 2: FONTE DIMINUÍDA !!!! */
+            font-size: clamp(9px, 2.8vw, 12px);
         }
 
         /* --- BOTÕES DE AÇÃO RESPONSIVOS --- */
         .botoes-acao {
-            margin-top: 15px;
+            margin-top: 10px; /* Margem diminuída */
             padding: 5px;
         }
         .botoes-acao button {
             padding: 10px 15px;
-            /* FONTE RESPONSIVA */
-            font-size: clamp(12px, 3.5vw, 14px);
+            font-size: clamp(11px, 3vw, 13px); /* Diminuído */
             cursor: pointer;
             border: none;
             border-radius: 4px;
             margin: 0 5px;
-            background-color: #28a745; /* Verde */
+            background-color: #28a745;
             color: white;
         }
         .botoes-acao button.btn-new {
-            background-color: #ffc107; /* Amarelo */
+            background-color: #ffc107;
             color: #333;
         }
 
@@ -132,7 +133,7 @@
 
     <div class="convite-container" id="conviteArea"> 
         
-        <img src="conviteeditavel.png" alt="Convite Trombetas e Festas 2025">
+        <img src="fundo.png" alt="Convite Trombetas e Festas 2025">
 
         <div class="conteudo">
             <div id="area-input">
@@ -195,7 +196,7 @@
 
             html2canvas(conviteElement, {
                 useCORS: true, 
-                scale: 2, // Imagem com o dobro da resolução
+                scale: 2,
                 logging: false 
             }).then(function(canvas) {
                 var link = document.createElement('a');
