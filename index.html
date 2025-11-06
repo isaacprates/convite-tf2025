@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convite Especial - Trombetas e Festas 2025</title>
+    
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
     <style>
         /* CSS NOVO E MELHORADO */
 
@@ -12,146 +15,197 @@
             padding: 0;
             font-family: Arial, sans-serif;
             text-align: center;
-            /* Um fundo cinza claro para a página */
             background-color: #f0f0f0; 
         }
 
-        /* O container que segura a imagem e o texto */
+        /* Container que segura a imagem e o texto */
         .convite-container {
-            position: relative; /* ESSENCIAL: O texto será posicionado relativo a este container */
-            
-            /* Define um tamanho máximo para o convite não ficar gigante no PC */
+            position: relative; 
             max-width: 600px; 
-            
-            /* Centraliza o convite na tela */
             margin: auto; 
-            
-            /* Garante que ele se comporte como um bloco */
             display: block; 
-            
-            /* Evita que o texto "vaze" */
             overflow: hidden; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra para destacar o convite */
         }
 
         /* A imagem de fundo (SUA ARTE COMPLETA) */
         .convite-container img {
-            width: 100%; /* Faz a imagem ocupar 100% do container */
-            display: block; /* Remove espaços extras embaixo da imagem */
+            width: 100%; 
+            display: block; 
         }
 
         /* Onde o texto interativo vai ficar */
         .conteudo {
-            /* MÁGICA: Posição absoluta DENTRO do .convite-container */
             position: absolute; 
-            
-            /* Posiciona o bloco de texto na parte de baixo da imagem */
-            bottom: 3%; /* Ajuste essa % (tipo 2% ou 5%) se o texto ficar muito em cima ou embaixo */
-            
-            /* Centraliza horizontalmente */
+            bottom: 3%; /* Ajuste essa % se o texto ficar muito em cima ou embaixo */
             left: 50%;
             transform: translateX(-50%);
-            
-            /* O texto vai ocupar 90% da largura da imagem */
             width: 90%; 
-            
-            /* Removemos o fundo branco que o código antigo criava */
             background-color: transparent; 
-            
-            /* Garantia de que o texto será escuro (para ler no fundo branco) */
             color: #333; 
         }
-
-        /* Área de preenchimento (Input e Botão) */
+        
+        /* Estilos para o campo de input e botão */
         #area-input {
             padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para o input */
+            border-radius: 5px;
+            margin-bottom: 10px;
         }
         #area-input input {
-            width: 80%;
+            width: calc(80% - 20px); /* Ajuste para padding */
             padding: 10px;
             font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
         }
         #area-input button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff; /* Azul */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        #area-input button:hover {
+            background-color: #0056b3;
         }
 
-        /* Área do convite (inicialmente escondida) */
+        /* Área do convite */
         #area-convite {
-            display: none; /* COMEÇA ESCONDIDO! */
-            color: #333; /* Texto escuro */
-            font-size: 0.9em; /* Letra um pouco menor para caber */
+            display: none; 
+            color: #333; 
+            font-size: 0.9em; 
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente para o texto */
+            padding: 10px;
+            border-radius: 5px;
         }
         
         #area-convite h2 {
-            font-size: 1.2em; /* Tamanho do "Trombetas e Festas" */
+            font-size: 1.2em; 
             margin: 10px 0;
         }
         
         #area-convite p {
-             margin: 5px 0; /* Espaçamento menor entre os parágrafos */
+             margin: 5px 0; 
         }
 
         /* O nome da pessoa em destaque */
         #nome-destaque {
-            color: #d9534f; /* Um vermelho/vinho */
+            color: #d9534f; 
             font-weight: bold;
-            font-size: 1.5em; /* Tamanho maior */
+            font-size: 1.5em; 
             margin-bottom: 10px;
+        }
+
+        /* Botões de Ação (Gerar Novo, Download) */
+        .botoes-acao {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .botoes-acao button {
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            margin: 0 5px;
+            background-color: #28a745; /* Verde para Download */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .botoes-acao button.btn-new {
+            background-color: #ffc107; /* Amarelo para Novo Convite */
+            color: #333;
+        }
+        .botoes-acao button:hover {
+            opacity: 0.9;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="convite-container">
-
+    <div class="convite-container" id="conviteArea"> 
         <img src="conviteeditavel.png" alt="Convite Trombetas e Festas 2025">
 
-
         <div class="conteudo">
-
             <div id="area-input">
                 <input type="text" id="campo-nome" placeholder="Digite seu nome aqui">
-                <br><br>
+                <br>
                 <button onclick="gerarConvite()">Personalizar Convite</button>
             </div>
 
             <div id="area-convite">
-                
                 <h1 id="nome-destaque">Olá!</h1>
-                
                 <p>Você e sua família são nossos convidados de honra para o:</p>
-                
                 <h2>"Culto Internacional - Trombetas e Festas 2025"</h2>
-                
                 <p>Será um evento de alerta para o mundo sobre os acontecimentos atuais que antecedem a volta de Jesus.</p>
-                
                 <p>
                     <strong>Data:</strong> 29 de Novembro de 2025<br>
                     <strong>Horário:</strong> 17h (Horário de Brasília)
                 </p>
-                
                 <p>Convidamos vocês para assistirem ao evento conosco na:</p>
-                
                 <strong>RUA OPHIL RIBEIRO, 393 - PALMEIRAS - BH</strong>
-            
             </div>
-
         </div>
-        
-    </div> <script>
+    </div> 
+    
+    <div class="botoes-acao" id="botoesAcao" style="display: none;">
+        <button class="btn-new" onclick="reiniciarConvite()">Gerar Novo Convite</button>
+        <button onclick="baixarConvite()">Baixar Imagem do Convite</button>
+    </div>
+
+    <script>
         function gerarConvite() {
             var nome = document.getElementById('campo-nome').value;
-            if (nome === "") {
+            if (nome.trim() === "") { // .trim() para remover espaços vazios
                 nome = "Convidado(a) Especial";
             }
-            var areaInput = document.getElementById('area-input');
-            var areaConvite = document.getElementById('area-convite');
-            var nomeDestaque = document.getElementById('nome-destaque');
-            nomeDestaque.innerText = "Olá, " + nome + "!";
-            areaInput.style.display = 'none';
-            areaConvite.style.display = 'block';
+            document.getElementById('nome-destaque').innerText = "Olá, " + nome + "!";
+            
+            document.getElementById('area-input').style.display = 'none';
+            document.getElementById('area-convite').style.display = 'block';
+            document.getElementById('botoesAcao').style.display = 'block'; // Mostra os botões de ação
+        }
+
+        function reiniciarConvite() {
+            document.getElementById('campo-nome').value = ''; // Limpa o campo
+            document.getElementById('area-input').style.display = 'block'; // Mostra a área de input
+            document.getElementById('area-convite').style.display = 'none'; // Esconde o convite
+            document.getElementById('botoesAcao').style.display = 'none'; // Esconde os botões de ação
+            document.getElementById('nome-destaque').innerText = 'Olá!'; // Reseta o texto
+        }
+
+        function baixarConvite() {
+            // Oculta os botões de ação temporariamente antes de tirar a foto
+            var botoesAcao = document.getElementById('botoesAcao');
+            botoesAcao.style.display = 'none';
+
+            var conviteElement = document.getElementById('conviteArea');
+
+            // html2canvas vai renderizar o que está dentro de 'conviteArea'
+            html2canvas(conviteElement, {
+                useCORS: true, // Importante se sua imagem de fundo vem de outro lugar (CDN do GitHub, etc.)
+                scale: 2, // Aumenta a resolução da imagem gerada (opcional, mas recomendado para melhor qualidade)
+                logging: false // Desabilita logs no console para não poluir
+            }).then(function(canvas) {
+                // Cria um link para download
+                var link = document.createElement('a');
+                link.download = 'convite-personalizado.png'; // Nome do arquivo
+                link.href = canvas.toDataURL('image/png', 1.0); // Converte o canvas para imagem PNG (1.0 = qualidade máxima)
+                document.body.appendChild(link); // Adiciona o link ao body (temporariamente)
+                link.click(); // Simula um clique no link para iniciar o download
+                document.body.removeChild(link); // Remove o link
+                
+                // Reexibe os botões de ação
+                botoesAcao.style.display = 'block';
+            });
         }
     </script>
 
