@@ -3,48 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite Especial</title>
-
+    <title>Convite Especial - Trombetas e Festas 2025</title>
     <style>
-        /* CSS BÁSICO SÓ PRA COISA FUNCIONAR */
+        /* CSS NOVO E MELHORADO */
 
-        /* Zera as margens */
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
             font-family: Arial, sans-serif;
             text-align: center;
+            /* Um fundo cinza claro para a página */
+            background-color: #f0f0f0; 
         }
 
-        /* AQUI VAI SUA IMAGEM DE FUNDO */
-        .background-convite {
-            background-image: url('conviteeditavel.png'); /* 
-            background-size: cover; /* Cobre a tela toda */
-            background-position: center;
-            height: 100%;
-            position: relative;
-        }
-
-        /* Área onde o texto do convite vai ficar */
-        .conteudo {
-            /* Isso centraliza o bloco de texto. */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        /* O container que segura a imagem e o texto */
+        .convite-container {
+            position: relative; /* ESSENCIAL: O texto será posicionado relativo a este container */
             
-            /* Ajuste o visual */
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
+            /* Define um tamanho máximo para o convite não ficar gigante no PC */
+            max-width: 600px; 
+            
+            /* Centraliza o convite na tela */
+            margin: auto; 
+            
+            /* Garante que ele se comporte como um bloco */
+            display: block; 
+            
+            /* Evita que o texto "vaze" */
+            overflow: hidden; 
+        }
+
+        /* A imagem de fundo (SUA ARTE COMPLETA) */
+        .convite-container img {
+            width: 100%; /* Faz a imagem ocupar 100% do container */
+            display: block; /* Remove espaços extras embaixo da imagem */
+        }
+
+        /* Onde o texto interativo vai ficar */
+        .conteudo {
+            /* MÁGICA: Posição absoluta DENTRO do .convite-container */
+            position: absolute; 
+            
+            /* Posiciona o bloco de texto na parte de baixo da imagem */
+            bottom: 3%; /* Ajuste essa % (tipo 2% ou 5%) se o texto ficar muito em cima ou embaixo */
+            
+            /* Centraliza horizontalmente */
+            left: 50%;
+            transform: translateX(-50%);
+            
+            /* O texto vai ocupar 90% da largura da imagem */
+            width: 90%; 
+            
+            /* Removemos o fundo branco que o código antigo criava */
+            background-color: transparent; 
+            
+            /* Garantia de que o texto será escuro (para ler no fundo branco) */
+            color: #333; 
         }
 
         /* Área de preenchimento (Input e Botão) */
         #area-input {
-            padding: 20px;
+            padding: 10px 0;
         }
         #area-input input {
             width: 80%;
@@ -60,28 +79,42 @@
         /* Área do convite (inicialmente escondida) */
         #area-convite {
             display: none; /* COMEÇA ESCONDIDO! */
+            color: #333; /* Texto escuro */
+            font-size: 0.9em; /* Letra um pouco menor para caber */
         }
         
+        #area-convite h2 {
+            font-size: 1.2em; /* Tamanho do "Trombetas e Festas" */
+            margin: 10px 0;
+        }
+        
+        #area-convite p {
+             margin: 5px 0; /* Espaçamento menor entre os parágrafos */
+        }
+
         /* O nome da pessoa em destaque */
         #nome-destaque {
-            color: #d9534f; /* Um vermelho/vinho, mude se quiser */
+            color: #d9534f; /* Um vermelho/vinho */
             font-weight: bold;
             font-size: 1.5em; /* Tamanho maior */
+            margin-bottom: 10px;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="background-convite">
+    <div class="convite-container">
+
+        <img src="fundo.png" alt="Convite Trombetas e Festas 2025">
+
 
         <div class="conteudo">
 
             <div id="area-input">
-                <h2>Digite seu nome para personalizar o convite:</h2>
-                <input type="text" id="campo-nome" placeholder="Digite seu nome completo">
+                <input type="text" id="campo-nome" placeholder="Digite seu nome aqui">
                 <br><br>
-                <button onclick="gerarConvite()">Gerar meu Convite</button>
+                <button onclick="gerarConvite()">Personalizar Convite</button>
             </div>
 
             <div id="area-convite">
@@ -106,30 +139,18 @@
             </div>
 
         </div>
-    </div>
-
-    <script>
+        
+    </div> <script>
         function gerarConvite() {
-            // 1. Pega o nome que a pessoa digitou
             var nome = document.getElementById('campo-nome').value;
-
-            // 2. Se a pessoa não digitou nada, a gente chama ela de "Convidado Especial"
             if (nome === "") {
                 nome = "Convidado(a) Especial";
             }
-
-            // 3. Pega os elementos da página
             var areaInput = document.getElementById('area-input');
             var areaConvite = document.getElementById('area-convite');
             var nomeDestaque = document.getElementById('nome-destaque');
-
-            // 4. Coloca o nome da pessoa no convite
             nomeDestaque.innerText = "Olá, " + nome + "!";
-
-            // 5. Esconde a área de input
             areaInput.style.display = 'none';
-
-            // 6. Mostra a área do convite
             areaConvite.style.display = 'block';
         }
     </script>
