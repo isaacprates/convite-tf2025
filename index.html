@@ -8,7 +8,6 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <style>
-        /* O CSS é o mesmo da última versão, não mudei nada aqui */
         body, html {
             margin: 0;
             padding: 0;
@@ -52,7 +51,7 @@
             font-size: clamp(12px, 3.5vw, 15px);
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-bottom: 10px; /* Espaço entre os inputs */
+            margin-bottom: 10px; 
         }
         #area-input button {
             padding: 10px 20px;
@@ -89,10 +88,13 @@
             margin-top: 0;
         }
         
-        /* O ID do novo endereço */
+        /* !!!! MUDANÇA NO CSS BEM AQUI !!!! */
         #endereco-destaque {
-            font-size: clamp(9px, 2.8vw, 12px);
+            /* 1. FONTE MAIOR (estava 9px, 2.8vw, 12px) */
+            font-size: clamp(12px, 4vw, 18px); 
             font-weight: bold;
+            /* 2. COR VERMELHA */
+            color: #d9534f; 
         }
 
         .botoes-acao {
@@ -125,9 +127,8 @@
         <div class="conteudo">
             <div id="area-input">
                 
-                <input type="text" id="campo-nome" placeholder="Digite o nome do convidado">
+                <input type="text" id="campo-nome" placeholder="Digite o nome do seu convidado">
                 <br>
-                
                 <input type="text" id="campo-endereco" placeholder="Digite o endereço da igreja aqui">
                 <br>
                 
@@ -163,39 +164,36 @@
 
     <script>
         function gerarConvite() {
-            // --- PEGA O NOME ---
             var nome = document.getElementById('campo-nome').value;
             if (nome.trim() === "") { 
                 nome = "Convidado(a) Especial";
             }
             document.getElementById('nome-destaque').innerText = "Olá, " + nome + "!";
             
-            // --- !!!! MUDANÇA 3: PEGA O ENDEREÇO !!!! ---
             var endereco = document.getElementById('campo-endereco').value;
             if (endereco.trim() === "") {
-                // Se não digitar, coloca um texto padrão
                 endereco = "Nossa igreja mais próxima de você!"; 
             }
-            // Coloca o endereço no lugar certo
-            document.getElementById('endereco-destaque').innerText = endereco.toUpperCase(); // Deixei em maiúsculo pra destacar
+            
+            /* !!!! MUDANÇA NO JAVASCRIPT BEM AQUI !!!! */
+            /* Tirei o .toUpperCase() para não ficar tão gritante */
+            document.getElementById('endereco-destaque').innerText = endereco; 
 
             
-            // --- MOSTRA/ESCONDE AS ÁREAS ---
             document.getElementById('area-input').style.display = 'none';
             document.getElementById('area-convite').style.display = 'block';
             document.getElementById('botoesAcao').style.display = 'block'; 
         }
 
         function reiniciarConvite() {
-            // --- !!!! MUDANÇA 4: LIMPA OS DOIS CAMPOS !!!! ---
             document.getElementById('campo-nome').value = ''; 
-            document.getElementById('campo-endereco').value = ''; // Limpa o endereço
+            document.getElementById('campo-endereco').value = ''; 
             
             document.getElementById('area-input').style.display = 'block'; 
             document.getElementById('area-convite').style.display = 'none'; 
-            document.getElementById('botoesAcao').style.display = 'none'; 
+            document.getElementById('botoes-acao').style.display = 'none'; 
             document.getElementById('nome-destaque').innerText = 'Olá!'; 
-            document.getElementById('endereco-destaque').innerText = ''; // Limpa o texto do endereço
+            document.getElementById('endereco-destaque').innerText = ''; 
         }
 
         function baixarConvite() {
