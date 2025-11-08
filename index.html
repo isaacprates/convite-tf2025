@@ -1,223 +1,323 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Convite Especial - Trombetas e Festas 2025</title>
-    
+
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0; 
-            line-height: 1.4; 
-        }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f0f0;
+        line-height: 1.4;
+      }
 
-        .convite-container {
-            position: relative; 
-            max-width: 600px; 
-            margin: auto; 
-            display: block; 
-            overflow: hidden; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-        }
+      /* Área de entrada */
+      #area-input {
+        text-align: center;
+        margin: 40px auto;
+        padding: 15px;
+        background: #ffffff;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
 
-        .convite-container img {
-            width: 100%; 
-            display: block; 
-        }
+      #area-input input,
+      #area-input select {
+        width: 80%;
+        padding: 10px;
+        font-size: clamp(12px, 3.5vw, 15px);
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 10px;
+      }
 
-        .conteudo {
-            position: absolute; 
-            bottom: 1%; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%; 
-            background-color: transparent; 
-            color: #333; 
-        }
-        
-        #area-input {
-            padding: 5px 0;
-            margin-bottom: 5px;
-        }
-        #area-input input {
-            width: calc(80% - 20px); 
-            padding: 10px;
-            font-size: clamp(12px, 3.5vw, 15px);
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 10px; 
-        }
-        #area-input button {
-            padding: 10px 20px;
-            font-size: clamp(12px, 3.5vw, 15px);
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: white;
-        }
+      #area-input button {
+        padding: 10px 20px;
+        font-size: clamp(12px, 3.5vw, 15px);
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+        background-color: #007bff;
+        color: white;
+        transition: 0.2s;
+      }
 
-        #area-convite {
-            display: none; 
-            color: #333; 
-            font-size: clamp(8px, 2.5vw, 12px);
-        }
-        
-        #area-convite h2 {
-            font-size: clamp(10px, 3vw, 14px);
-            font-weight: bold;
-            margin: 5px 0;
-            color: #000;
-        }
-        
-        #area-convite p {
-             margin: 4px 0;
-        }
+      #area-input button:hover {
+        background-color: #0056b3;
+      }
 
-        #nome-destaque {
-            color: #d9534f; 
-            font-weight: bold;
-            font-size: clamp(14px, 4.5vw, 20px);
-            margin-bottom: 5px;
-            margin-top: 0;
-        }
-        
-        /* !!!! MUDANÇA NO CSS BEM AQUI !!!! */
-        #endereco-destaque {
-            /* 1. FONTE MAIOR (estava 9px, 2.8vw, 12px) */
-            font-size: clamp(12px, 4vw, 18px); 
-            font-weight: bold;
-            /* 2. COR VERMELHA */
-            color: #d9534f; 
-        }
+      /* Container do convite — inicialmente escondido */
+      .convite-container {
+        position: relative;
+        max-width: 600px;
+        margin: 20px auto;
+        display: none; /* começa escondido */
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+      }
 
-        .botoes-acao {
-            margin-top: 10px;
-            padding: 5px;
-        }
-        .botoes-acao button {
-            padding: 10px 15px;
-            font-size: clamp(11px, 3vw, 13px);
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            margin: 0 5px;
-            background-color: #28a745;
-            color: white;
-        }
-        .botoes-acao button.btn-new {
-            background-color: #ffc107;
-            color: #333;
-        }
+      .convite-container img {
+        width: 100%;
+        display: block;
+      }
 
+      /* Texto sobre a imagem */
+      .conteudo {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        color: #333;
+        background-color: transparent;
+        text-align: center;
+        padding-bottom: 10px;
+      }
+
+      #area-convite {
+        display: none;
+        font-size: clamp(8px, 2.5vw, 12px);
+      }
+
+      #area-convite h2 {
+        font-size: clamp(10px, 3vw, 14px);
+        font-weight: bold;
+        margin: 5px 0;
+        color: #000;
+      }
+
+      #area-convite p {
+        margin: 4px 0;
+      }
+
+      #nome-destaque {
+        color: #d9534f;
+        font-weight: bold;
+        font-size: clamp(14px, 4.5vw, 20px);
+        margin: 5px 0;
+      }
+
+      #endereco-destaque {
+        font-size: clamp(12px, 4vw, 18px);
+        font-weight: bold;
+        color: #d9534f;
+      }
+
+      /* Botões */
+      .botoes-acao {
+        margin-top: 15px;
+        padding: 10px;
+        display: none; /* começa escondido */
+      }
+
+      .botoes-acao button {
+        padding: 10px 15px;
+        font-size: clamp(11px, 3vw, 13px);
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+        margin: 0 5px;
+        background-color: #28a745;
+        color: white;
+        transition: 0.2s;
+      }
+
+      .botoes-acao button:hover {
+        background-color: #218838;
+      }
+
+      .botoes-acao button.btn-new {
+        background-color: #ffc107;
+        color: #333;
+      }
+
+      .botoes-acao button.btn-new:hover {
+        background-color: #e0a800;
+      }
     </style>
-</head>
-<body>
+  </head>
 
-    <div class="convite-container" id="conviteArea"> 
-        
-        <img src="conviteeditavel.png" alt="Convite Trombetas e Festas 2025">
+  <body>
+    <!-- 🧾 Campos de entrada -->
+    <div id="area-input">
+      <select id="campo-idioma">
+        <option value="pt">Português 🇧🇷</option>
+        <option value="en">English 🇺🇸</option>
+      </select>
+      <br />
+      <input
+        type="text"
+        id="campo-nome"
+        placeholder="Digite o nome do seu convidado"
+      />
+      <br />
+      <input
+        type="text"
+        id="campo-endereco"
+        placeholder="Digite o endereço da igreja aqui"
+      />
+      <br />
+      <input type="date" id="campo-data" value="2025-11-29" />
+      <br />
+      <input type="time" id="campo-horario" value="17:00" />
+      <br />
+      <button onclick="gerarConvite()">Personalizar Convite</button>
+    </div>
 
-        <div class="conteudo">
-            <div id="area-input">
-                
-                <input type="text" id="campo-nome" placeholder="Digite o nome do seu convidado">
-                <br>
-                <input type="text" id="campo-endereco" placeholder="Digite o endereço da igreja aqui">
-                <br>
-                
-                <button onclick="gerarConvite()">Personalizar Convite</button>
-            </div>
+    <!-- 📜 Convite (escondido até ser gerado) -->
+    <div class="convite-container" id="conviteArea">
+      <img src="conviteeditavel.png" alt="Convite Trombetas e Festas 2025" />
+      <div class="conteudo" id="area-convite">
+        <h2 id="titulo-convite">CONVITE ESPECIAL</h2>
+        <h1 id="nome-destaque">Olá!</h1>
+        <p id="mensagem1">
+          Você e sua família são nossos convidados de honra para o:
+        </p>
+        <h2 id="evento-titulo">
+          "Culto Internacional - Trombetas e Festas 2025"
+        </h2>
+        <p id="mensagem2">
+          Será um evento de alerta para o mundo sobre os acontecimentos atuais
+          que antecedem a volta de Jesus.
+        </p>
+        <p id="mensagem3">
+          <strong>Data:</strong> 29 de Novembro de 2025<br />
+          <strong>Horário:</strong> 17:00
+        </p>
+        <p id="mensagem4">
+          Convidamos vocês para assistirem ao evento conosco na:
+        </p>
+        <strong id="endereco-destaque">[Endereço aparecerá aqui]</strong>
+      </div>
+    </div>
 
-            <div id="area-convite">
-                
-                <h2>CONVITE ESPECIAL</h2>
-                
-                <h1 id="nome-destaque">Olá!</h1>
-                <p>Você e sua família são nossos convidados de honra para o:</p>
-                
-                <h2>"Culto Internacional - Trombetas e Festas 2025"</h2>
-                
-                <p>Será um evento de alerta para o mundo sobre os acontecimentos atuais que antecedem a volta de Jesus.</p>
-                <p>
-                    <strong>Data:</strong> 29 de Novembro de 2025<br>
-                    <strong>Horário:</strong> 17h (Horário de Brasília)
-                </p>
-                <p>Convidamos vocês para assistirem ao evento conosco na:</p>
-                
-                <strong id="endereco-destaque">[Endereço aparecerá aqui]</strong>
-                
-            </div>
-        </div>
-    </div> 
-    
-    <div class="botoes-acao" id="botoesAcao" style="display: none;">
-        <button class="btn-new" onclick="reiniciarConvite()">Gerar Novo Convite</button>
-        <button onclick="baixarConvite()">Baixar Imagem do Convite</button>
+    <!-- 🖼️ Botões -->
+    <div class="botoes-acao" id="botoesAcao">
+      <button class="btn-new" onclick="reiniciarConvite()">
+        Gerar Novo Convite
+      </button>
+      <button onclick="baixarConvite()">Baixar Imagem do Convite</button>
     </div>
 
     <script>
-        function gerarConvite() {
-            var nome = document.getElementById('campo-nome').value;
-            if (nome.trim() === "") { 
-                nome = "Convidado(a) Especial";
-            }
-            document.getElementById('nome-destaque').innerText = "Olá, " + nome + "!";
-            
-            var endereco = document.getElementById('campo-endereco').value;
-            if (endereco.trim() === "") {
-                endereco = "Nossa igreja mais próxima de você!"; 
-            }
-            
-            /* !!!! MUDANÇA NO JAVASCRIPT BEM AQUI !!!! */
-            /* Tirei o .toUpperCase() para não ficar tão gritante */
-            document.getElementById('endereco-destaque').innerText = endereco; 
+      const textos = {
+        pt: {
+          titulo: 'CONVITE ESPECIAL',
+          saudacao: (nome) => `Olá, ${nome}!`,
+          msg1: 'Você e sua família são nossos convidados de honra para o:',
+          evento: '"Culto Internacional - Trombetas e Festas 2025"',
+          msg2: 'Será um evento de alerta para o mundo sobre os acontecimentos atuais que antecedem a volta de Jesus.',
+          msg3: (data, hora) =>
+            `<strong>Data:</strong> ${data}<br><strong>Horário:</strong> ${hora}`,
+          msg4: 'Convidamos vocês para assistirem ao evento conosco na:',
+        },
+        en: {
+          titulo: 'SPECIAL INVITATION',
+          saudacao: (nome) => `Hello, ${nome}!`,
+          msg1: 'You and your family are our special guests for the:',
+          evento: '"International Service - Trumpets and Feasts 2025"',
+          msg2: 'This will be a prophetic alert to the world about the events that precede the return of Jesus.',
+          msg3: (data, hora) =>
+            `<strong>Date:</strong> ${data}<br><strong>Time:</strong> ${hora}`,
+          msg4: 'We invite you to join us at:',
+        },
+      }
 
-            
-            document.getElementById('area-input').style.display = 'none';
-            document.getElementById('area-convite').style.display = 'block';
-            document.getElementById('botoesAcao').style.display = 'block'; 
-        }
+      function formatarData(valorData, idioma) {
+        const data = new Date(valorData)
+        return data.toLocaleDateString(idioma === 'pt' ? 'pt-BR' : 'en-US', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })
+      }
 
-        function reiniciarConvite() {
-            document.getElementById('campo-nome').value = ''; 
-            document.getElementById('campo-endereco').value = ''; 
-            
-            document.getElementById('area-input').style.display = 'block'; 
-            document.getElementById('area-convite').style.display = 'none'; 
-            document.getElementById('botoes-acao').style.display = 'none'; 
-            document.getElementById('nome-destaque').innerText = 'Olá!'; 
-            document.getElementById('endereco-destaque').innerText = ''; 
-        }
+      function formatarHorario(horario, idioma) {
+        if (idioma === 'pt') return horario
+        const [hora, minuto] = horario.split(':').map(Number)
+        const ampm = hora >= 12 ? 'PM' : 'AM'
+        const hora12 = hora % 12 || 12
+        return `${hora12}:${minuto.toString().padStart(2, '0')} ${ampm}`
+      }
 
-        function baixarConvite() {
-            var botoesAcao = document.getElementById('botoesAcao');
-            botoesAcao.style.display = 'none'; 
+      function gerarConvite() {
+        const idioma = document.getElementById('campo-idioma').value
+        let nome = document.getElementById('campo-nome').value.trim()
+        let endereco = document.getElementById('campo-endereco').value.trim()
+        let data = document.getElementById('campo-data').value
+        let horario = document.getElementById('campo-horario').value || '17:00'
 
-            var conviteElement = document.getElementById('conviteArea');
+        if (!nome)
+          nome = idioma === 'pt' ? 'Convidado(a) Especial' : 'Special Guest'
+        if (!endereco)
+          endereco =
+            idioma === 'pt'
+              ? 'Nossa igreja mais próxima de você!'
+              : 'Our nearest church to you!'
 
-            html2canvas(conviteElement, {
-                useCORS: true, 
-                scale: 2,
-                logging: false 
-            }).then(function(canvas) {
-                var link = document.createElement('a');
-                link.download = 'convite-personalizado.png'; 
-                link.href = canvas.toDataURL('image/png', 1.0); 
-                document.body.appendChild(link); 
-                link.click(); 
-                document.body.removeChild(link); 
-                
-                botoesAcao.style.display = 'block'; 
-            });
-        }
+        const dataFormatada = formatarData(data, idioma)
+        const horarioFormatado = formatarHorario(horario, idioma)
+        const t = textos[idioma]
+
+        document.getElementById('titulo-convite').innerText = t.titulo
+        document.getElementById('nome-destaque').innerText = t.saudacao(nome)
+        document.getElementById('mensagem1').innerText = t.msg1
+        document.getElementById('evento-titulo').innerText = t.evento
+        document.getElementById('mensagem2').innerText = t.msg2
+        document.getElementById('mensagem3').innerHTML = t.msg3(
+          dataFormatada,
+          horarioFormatado
+        )
+        document.getElementById('mensagem4').innerText = t.msg4
+        document.getElementById('endereco-destaque').innerText = endereco
+
+        // mostra o convite e botões, esconde os inputs
+        document.getElementById('area-input').style.display = 'none'
+        document.getElementById('conviteArea').style.display = 'block'
+        document.getElementById('area-convite').style.display = 'block'
+        document.getElementById('botoesAcao').style.display = 'block'
+      }
+
+      function reiniciarConvite() {
+        document.getElementById('campo-nome').value = ''
+        document.getElementById('campo-endereco').value = ''
+        document.getElementById('campo-data').value = '2025-11-29'
+        document.getElementById('campo-horario').value = '17:00'
+        document.getElementById('area-input').style.display = 'block'
+        document.getElementById('conviteArea').style.display = 'none'
+        document.getElementById('botoesAcao').style.display = 'none'
+      }
+
+      function baixarConvite() {
+        const botoesAcao = document.getElementById('botoesAcao')
+        botoesAcao.style.display = 'none'
+
+        const conviteElement = document.getElementById('conviteArea')
+
+        html2canvas(conviteElement, {
+          useCORS: true,
+          scale: 2,
+          logging: false,
+        }).then(function (canvas) {
+          const link = document.createElement('a')
+          link.download = 'convite-personalizado.png'
+          link.href = canvas.toDataURL('image/png', 1.0)
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          botoesAcao.style.display = 'block'
+        })
+      }
     </script>
-
-</body>
+  </body>
 </html>
