@@ -23,6 +23,8 @@
         width: 560px;
         overflow-x: hidden;
         background-color: #f0f0f0;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
       }
 
       /* Área de entrada */
@@ -127,6 +129,13 @@
         background-color: transparent;
         text-align: center;
         padding-bottom: 10px;
+      }
+
+      #conviteArea,
+      #conviteArea * {
+        -webkit-text-size-adjust: none !important;
+        text-size-adjust: none !important;
+        font-size-adjust: none;
       }
 
       #area-convite {
